@@ -1,1 +1,135 @@
 @import "tailwindcss";
+
+@theme {
+  --color-teal-deep: #0f5c63;
+  --color-teal-ink: #14262b;
+  --color-gold: #d9a441;
+  --color-gold-light: #e8c06e;
+  --color-offwhite: #f7f5f2;
+  --color-offwhite-warm: #faf8f5;
+  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-offwhite);
+  color: var(--color-teal-ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Focus styles */
+*:focus-visible {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Room swipe row */
+.rooms-scroll {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  gap: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.rooms-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.room-card {
+  scroll-snap-align: start;
+  flex: 0 0 85%;
+  min-width: 280px;
+}
+
+@media (min-width: 768px) {
+  .room-card {
+    flex: 0 0 calc(33.333% - 0.67rem);
+    min-width: 0;
+  }
+  .rooms-scroll {
+    overflow-x: visible;
+    scroll-snap-type: none;
+  }
+}
+
+/* Hero gradient fallback */
+.hero-fallback {
+  background: linear-gradient(
+    135deg,
+    #0f5c63 0%,
+    #14262b 40%,
+    #1a3a42 60%,
+    #0f5c63 100%
+  );
+}
+
+/* Image slot fallbacks */
+.img-slot {
+  background: linear-gradient(135deg, #0f5c63 0%, #1a3a42 50%, #14262b 100%);
+}
+
+.img-slot-alt {
+  background: linear-gradient(135deg, #14262b 0%, #0f5c63 50%, #1a4a52 100%);
+}
+
+.img-slot-warm {
+  background: linear-gradient(135deg, #14262b 0%, #1a3a42 40%, #2a5a5e 100%);
+}
+
+.img-slot-gold {
+  background: linear-gradient(135deg, #14262b 0%, #0f5c63 60%, #d9a441 100%);
+}
+
+/* Sticky bottom bar */
+.sticky-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: white;
+  border-top: 1px solid #e5e5e5;
+  padding: 0.75rem 1rem;
+  padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+  display: flex;
+  gap: 0.75rem;
+  box-shadow: 0 -4px 12px rgba(0,0,0,0.08);
+}
+
+@media (min-width: 768px) {
+  .sticky-bar {
+    display: none;
+  }
+}
+
+/* Preview banner */
+.preview-banner {
+  background: var(--color-teal-ink);
+  color: rgba(255,255,255,0.85);
+  font-size: 0.75rem;
+  text-align: center;
+  padding: 0.5rem 1rem;
+  letter-spacing: 0.01em;
+}
